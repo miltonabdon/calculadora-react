@@ -1,33 +1,55 @@
 import React from "react";
 
 function CalculadoraService() {
+  const SOMA = "+";
+  const SUBTRACAO = "-";
+  const MULTIPLICACAO = "*";
+  const DIVISAO = "/";
+
   function calcular(numero1, numero2, operacao) {
     let resultado;
 
     switch (operacao) {
-      case "+":
+      case SOMA:
         resultado = numero1 + numero2;
         break;
 
-      case "-":
+      case SUBTRACAO:
         resultado = numero1 - numero2;
         break;
 
-      case "*":
+      case MULTIPLICACAO:
         resultado = numero1 * numero2;
         break;
 
-      case "/":
+      case DIVISAO:
         resultado = numero1 / numero2;
         break;
 
       default:
+        resultado = 0;
         break;
     }
     return resultado;
   }
 
-  return [calcular];
+  function concatenarNumero(numAtual, numConcat) {
+    if (numAtual === "0" || numAtual === null) {
+      numAtual = "";
+    }
+
+    if (numConcat === "." && numAtual === "") {
+      return "0.";
+    }
+
+    if (numConcat === "." && numAtual.indexOf(".") > -1) {
+      return numAtual;
+    }
+
+    return numAtual + numConcat;
+  }
+
+  return [calcular, concatenarNumero, SOMA, SUBTRACAO, MULTIPLICACAO, DIVISAO];
 }
 
 export default CalculadoraService;
